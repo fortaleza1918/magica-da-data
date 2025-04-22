@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Mágica da Data Revelada</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+    }
+    .iphone-calc {
+      background: #1c1c1e;
+      border-radius: 40px;
+      padding: 30px;
+      width: 320px;
+      box-shadow: 0 0 20px rgba(255, 165, 0, 0.3);
+    }
+    h2 {
+      text-align: center;
+      color: #f2f2f7;
+    }
+    label {
+      font-size: 14px;
+      display: block;
+      margin-top: 1em;
+      color: #9fa0a6;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      background: #2c2c2e;
+      color: #fff;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 50px;
+      font-size: 18px;
+      background: #ff9500;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #e58b00;
+    }
+    #resultado {
+      margin-top: 20px;
+      background: #2c2c2e;
+      padding: 15px;
+      border-radius: 12px;
+      color: #f2f2f7;
+      font-size: 14px;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div class="iphone-calc">
+    <h2>Mágica da Data</h2>
+    <label>Dia:</label>
+    <input type="number" id="dia" min="1" max="31">
+    <label>Mês:</label>
+    <input type="number" id="mes" min="1" max="12">
+    <label>Ano:</label>
+    <input type="number" id="ano" min="1900">
+    <label>Hora:</label>
+    <input type="number" id="hora" min="0" max="23">
+    <label>Minuto:</label>
+    <input type="number" id="minuto" min="0" max="59">
+
+    <button onclick="calcularMagica()">Calcular Número Mágico</button>
+
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    function calcularMagica() {
+      const dia = parseInt(document.getElementById('dia').value);
+      const mes = parseInt(document.getElementById('mes').value);
+      const ano = parseInt(document.getElementById('ano').value);
+      const hora = parseInt(document.getElementById('hora').value);
+      const minuto = parseInt(document.getElementById('minuto').value);
+
+      if (isNaN(dia) || isNaN(mes) || isNaN(ano) || isNaN(hora) || isNaN(minuto)) {
+        document.getElementById('resultado').innerText = 'Preencha todos os campos corretamente.';
+        return;
+      }
+
+      const fatorFixo = 194;
+      const dataNumero = parseInt(`${dia.toString().padStart(2, '0')}${mes.toString().padStart(2, '0')}${ano}${hora.toString().padStart(2, '0')}${minuto.toString().padStart(2, '0')}`);
+      const numeroMagico = dataNumero / fatorFixo;
+
+      document.getElementById('resultado').innerHTML = `
+        <strong>Número da data:</strong> ${dataNumero}<br>
+        <strong>Dividir por:</strong> ${fatorFixo}<br>
+        <strong>Resultado (número mágico):</strong> ${numeroMagico.toFixed(10)}
+      `;
+    }
+  </script>
+</body>
+</html>
